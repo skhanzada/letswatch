@@ -18,8 +18,6 @@ import com.sk.android.letswatch.vo.Status
 
 class MoviesFragment : BaseFragment(), StateLifecycle<MovieWebServiceResponse> {
 
-    val TAG = MoviesFragment::class.java.simpleName
-
     lateinit var moviesViewModel: MoviesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,23 +42,12 @@ class MoviesFragment : BaseFragment(), StateLifecycle<MovieWebServiceResponse> {
         moviesViewModel.loadTopRatedMovies(MovieWebServiceRequest(BuildConfig.API_KEY))
     }
 
-    override fun loading() {
-        Log.d(TAG, "Loading movies")
-    }
-
     override fun update(state: Resource<MovieWebServiceResponse>) {
         when (state.status) {
             Status.LOADING -> loading()
             Status.SUCCESS -> Log.d(TAG, "${state.data?.results?.size} Movies found")
-            Status.ERROR -> failed(state)
+            Status.ERROR -> failed(state.message!!)
         }
-    }
-
-    override fun failed(failed: Resource<MovieWebServiceResponse>) {
-        Log.d(
-            TAG,
-            "Error occurred while processing request: msg: ${failed.message}"
-        )
     }
 
 }

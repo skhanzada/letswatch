@@ -18,4 +18,5 @@ abstract class UseCase<Request, Response> {
             onResult(job.await())
         }
     }
+
 }

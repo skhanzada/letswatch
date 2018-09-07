@@ -3,9 +3,11 @@ package com.sk.android.letswatch.movies
 import com.sk.android.letswatch.data.source.MovieRepository
 import com.sk.android.letswatch.data.source.remote.MovieWebServiceRequest
 import com.sk.android.letswatch.data.source.remote.MovieWebServiceResponse
+import com.sk.android.letswatch.testing.OpenForTesting
 import com.sk.android.letswatch.vo.Resource
 import javax.inject.Inject
 
+@OpenForTesting
 class TopRatedMoviesUseCase @Inject constructor(private val movieRepository: MovieRepository) :
     UseCase<MovieWebServiceRequest, MovieWebServiceResponse>() {
 

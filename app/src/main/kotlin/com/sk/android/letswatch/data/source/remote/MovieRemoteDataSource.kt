@@ -1,9 +1,11 @@
 package com.sk.android.letswatch.data.source.remote
 
 import com.google.gson.Gson
+import com.sk.android.letswatch.testing.OpenForTesting
 import com.sk.android.letswatch.vo.Resource
 import javax.inject.Inject
 
+@OpenForTesting
 class MovieRemoteDataSource @Inject constructor(gson: Gson, val webService: MovieWebService) :
     AbstractRemoteDataSource(gson) {
 

@@ -2,9 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
 
 androidExtensions {
     experimental = true
+}
+
+allOpen {
+    // allows mocking for classes w/o directly opening them for release builds
+    annotation 'com.sk.android.letswatch.testing.OpenClass'
 }
 
 android {
@@ -19,7 +25,7 @@ android {
         vectorDrawables.useSupportLibrary true
 
         buildConfigField "String", "API_BASE_URL", "\"https://api.themoviedb.org/3/\""
-        buildConfigField "String", "API_KEY", "\"YOUR_API_KEY\""
+        buildConfigField "String", "API_KEY", "$rootProject.apiKey"
     }
     buildTypes {
         release {
@@ -77,9 +83,16 @@ dependencies {
     // test
     testImplementation "org.robolectric:robolectric:$rootProject.robolectricVersion"
     testImplementation "org.robolectric:shadows-supportv4:$rootProject.robolectricVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     testImplementation "org.amshove.kluent:kluent:$rootProject.kluentVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.mockitoKotlinVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestVersion"
+
+    testImplementation("android.arch.core:core-testing:$rootProject.lifecycleVersion", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
 
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"

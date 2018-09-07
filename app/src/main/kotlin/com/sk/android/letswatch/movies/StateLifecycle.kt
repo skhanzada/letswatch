@@ -8,6 +8,6 @@ interface StateLifecycle<State> {
 
     fun update(state: Resource<State>)
 
-    fun failed(failed: Resource<State>)
+    fun failed(message: String)
 
 }
