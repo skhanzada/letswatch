@@ -1,23 +1,30 @@
 package com.sk.android.letswatch.data.source.remote
 
-import com.sk.android.letswatch.data.Movie
+import com.google.gson.Gson
 import com.sk.android.letswatch.vo.Resource
 import javax.inject.Inject
 
-class MovieRemoteDataSource @Inject constructor(val webService: MovieWebService) {
+class MovieRemoteDataSource @Inject constructor(gson: Gson, val webService: MovieWebService) :
+    AbstractRemoteDataSource(gson) {
 
-    fun getTopRatedMovies(): Resource<List<Movie>> {
-        // execute call and return response
-        try {
-            val response = webService.getTopRatedMovies().execute()
-            return if (response.isSuccessful)
-                Resource.success(response.body()?.results)
-            else
-            //TODO need to handle failure later
-                Resource.error("Failed to load top rated movies", null)
-        } catch (e: Exception) {
-            return Resource.error(e.message!!, null)
-        }
+    fun getTopRatedMovies(nextPage: Int): Resource<MovieWebServiceResponse> {
+        return execute(webService.getTopRatedMovies(page = nextPage))
+    }
+
+    fun getPopularMovies(): Resource<MovieWebServiceResponse> {
+        TODO()
+    }
+
+    fun getLatestMovies(): Resource<MovieWebServiceResponse> {
+        TODO()
+    }
+
+    fun getUpcomingMovies(): Resource<MovieWebServiceResponse> {
+        TODO()
+    }
+
+    fun getNowPlayingMovies(): Resource<MovieWebServiceResponse> {
+        TODO()
     }
 
 }

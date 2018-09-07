@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sk.android.letswatch.BaseFragment
+import com.sk.android.letswatch.BuildConfig
 import com.sk.android.letswatch.R
-import com.sk.android.letswatch.data.Movie
+import com.sk.android.letswatch.data.source.remote.MovieWebServiceRequest
+import com.sk.android.letswatch.data.source.remote.MovieWebServiceResponse
 import com.sk.android.letswatch.vo.Resource
 import com.sk.android.letswatch.vo.Status
 
-class MoviesFragment : BaseFragment() {
+class MoviesFragment : BaseFragment(), StateLifecycle<MovieWebServiceResponse> {
 
     val TAG = MoviesFragment::class.java.simpleName
 
@@ -24,17 +26,9 @@ class MoviesFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         moviesViewModel =
                 ViewModelProviders.of(activity!!, viewModelFactory).get(MoviesViewModel::class.java)
-        moviesViewModel.topRatedMovies.observe(this, Observer {
-            updateState(it)
+        moviesViewModel.movies.observe(this, Observer {
+            it?.let { update(it) }
         })
-    }
-
-    fun updateState(it: Resource<List<Movie>>?) {
-        when (it?.status) {
-            Status.LOADING -> Log.d(TAG, "Loading movies")
-            Status.SUCCESS -> Log.d(TAG, "${it.data?.size} Movies found")
-            Status.ERROR -> Log.d(TAG, "Oops, something went wrong...")
-        }
     }
 
     override fun onCreateView(
@@ -47,6 +41,26 @@ class MoviesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviesViewModel.loadTopRatedMovies()
+        moviesViewModel.loadTopRatedMovies(MovieWebServiceRequest(BuildConfig.API_KEY))
     }
+
+    override fun loading() {
+        Log.d(TAG, "Loading movies")
+    }
+
+    override fun update(state: Resource<MovieWebServiceResponse>) {
+        when (state.status) {
+            Status.LOADING -> loading()
+            Status.SUCCESS -> Log.d(TAG, "${state.data?.results?.size} Movies found")
+            Status.ERROR -> failed(state)
+        }
+    }
+
+    override fun failed(failed: Resource<MovieWebServiceResponse>) {
+        Log.d(
+            TAG,
+            "Error occurred while processing request: msg: ${failed.message}"
+        )
+    }
+
 }
