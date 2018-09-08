@@ -1,0 +1,7 @@
+<resources>
+
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="movie_card_image_width">92dp</dimen>
+    <dimen name="movie_card_image_height">138dp</dimen>
+    <dimen name="default_margin_between_views">5dp</dimen>
+</resources>

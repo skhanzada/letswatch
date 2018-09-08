@@ -25,6 +25,7 @@ android {
         vectorDrawables.useSupportLibrary true
 
         buildConfigField "String", "API_BASE_URL", "\"https://api.themoviedb.org/3/\""
+        buildConfigField "String", "THUMBNAIL_BASE_URL", "\"https://image.tmdb.org/t/p/w92\""
         buildConfigField "String", "API_KEY", "$rootProject.apiKey"
     }
     buildTypes {
@@ -97,4 +98,8 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$kotlinVersion", {
+        exclude group: 'net.bytebuddy'
+    }
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmakerVersion"
 }

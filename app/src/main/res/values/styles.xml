@@ -8,4 +8,54 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Layout" />
+
+    <style name="Layout.WrapContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Layout.MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Layout.Container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MovieCard" />
+
+    <style name="MovieCard.Container" parent="Layout.Container">
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="MovieCard.Image">
+        <item name="android:layout_width">@dimen/movie_card_image_width</item>
+        <item name="android:layout_height">@dimen/movie_card_image_height</item>
+    </style>
+
+    <style name="MovieCard.Title" parent="Layout.WrapContent">
+        <item name="android:layout_marginStart">@dimen/default_margin_between_views</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MovieCard.Overview" parent="Layout.WrapContent">
+        <item name="android:layout_marginTop">@dimen/default_margin_between_views</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">4</item>
+    </style>
+
+    <style name="MovieCard.RatingLabel" parent="Layout.WrapContent">
+        <item name="android:layout_marginTop">@dimen/default_margin_between_views</item>
+        <item name="android:text">@string/rating_label</item>
+    </style>
+
+    <style name="MovieCard.Rating" parent="Layout.WrapContent">
+        <item name="android:layout_marginTop">@dimen/default_margin_between_views</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
