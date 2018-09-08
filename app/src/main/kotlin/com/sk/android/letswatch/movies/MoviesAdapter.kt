@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import com.sk.android.letswatch.R
 import com.sk.android.letswatch.data.Movie
 
-class MoviesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class MoviesAdapter(private val moviesViewModel: MoviesViewModel) :
+    RecyclerView.Adapter<MovieViewHolder>() {
 
     private var movies = listOf<Movie>()
 
@@ -20,8 +21,10 @@ class MoviesAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
     override fun getItemCount() = movies.size
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
+        holder.itemView.setOnClickListener { moviesViewModel.movieDetail.value = movies[position] }
+    }
 
     fun update(movies: List<Movie>) {
         this.movies = movies

@@ -4,6 +4,8 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.ForeignKey.CASCADE
 import android.arch.persistence.room.Index
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Entity(
@@ -12,6 +14,7 @@ import java.util.*
     ],
     primaryKeys = ["id"]
 )
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
@@ -29,7 +32,7 @@ data class Movie(
     val adult: Boolean,
     val video: Boolean,
     val topRated: Boolean
-) {
+) : Parcelable {
 
     /**
      * Join table entity for movie and genre since its a many-to-many relationship

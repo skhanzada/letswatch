@@ -26,13 +26,13 @@
 
     <TextView
         android:id="@+id/movieRatingLabel"
-        style="@style/MovieCard.RatingLabel"
+        style="@style/RatingLabel"
         app:layout_constraintStart_toStartOf="@+id/movieTitle"
         app:layout_constraintTop_toBottomOf="@+id/movieOverview" />
 
     <TextView
         android:id="@+id/movieRating"
-        style="@style/MovieCard.Rating"
+        style="@style/Rating"
         app:layout_constraintBaseline_toBaselineOf="@+id/movieRatingLabel"
         app:layout_constraintStart_toEndOf="@+id/movieRatingLabel"
         tools:text="8.6" />

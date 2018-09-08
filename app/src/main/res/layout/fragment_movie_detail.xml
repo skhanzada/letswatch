@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Layout.MatchParent"
+    android:background="@android:color/white">
+
+    <android.support.constraint.ConstraintLayout
+        style="@style/Layout.MatchParent"
+        android:padding="@dimen/default_margin">
+
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/movieTitle"
+            style="@style/MovieCard.Title"
+            app:layout_constraintStart_toEndOf="@+id/movieImage"
+            app:layout_constraintTop_toTopOf="@+id/movieImage"
+            tools:text="The Shawshank Redemption" />
+
+        <TextView
+            android:id="@+id/movieOverview"
+            style="@style/Layout.WrapContent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movieTitle"
+            app:layout_constraintTop_toBottomOf="@+id/movieTitle"
+            tools:text="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope." />
+
+        <TextView
+            android:id="@+id/movieRatingLabel"
+            style="@style/RatingLabel"
+            app:layout_constraintStart_toStartOf="@+id/movieTitle"
+            app:layout_constraintTop_toBottomOf="@+id/movieOverview" />
+
+        <TextView
+            android:id="@+id/movieRating"
+            style="@style/Rating"
+            app:layout_constraintBaseline_toBaselineOf="@+id/movieRatingLabel"
+            app:layout_constraintStart_toEndOf="@+id/movieRatingLabel"
+            tools:text="8.6" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

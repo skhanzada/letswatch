@@ -7,10 +7,13 @@ import com.sk.android.letswatch.BuildConfig
 import com.sk.android.letswatch.data.Movie
 import kotlinx.android.synthetic.main.movie_card_layout.view.*
 
+const val THUMBNAIL_IMAGE_BASE_URL = BuildConfig.IMAGES_BASE_URL + "w92"
+
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(movie: Movie) {
-        Glide.with(itemView.context).load(BuildConfig.THUMBNAIL_BASE_URL + movie.posterPath)
+        Glide.with(itemView.context)
+            .load(THUMBNAIL_IMAGE_BASE_URL + movie.posterPath)
             .into(itemView.movieImage)
 
         itemView.movieTitle.text = movie.title

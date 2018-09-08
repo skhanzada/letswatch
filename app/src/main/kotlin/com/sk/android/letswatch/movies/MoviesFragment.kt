@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.sk.android.letswatch.BaseFragment
 import com.sk.android.letswatch.BuildConfig
@@ -30,6 +29,10 @@ class MoviesFragment : BaseFragment(), StateLifecycle<MovieWebServiceResponse> {
             it?.let { update(it) }
         })
         moviesViewModel.loadTopRatedMovies(MovieWebServiceRequest(BuildConfig.API_KEY))
+
+        moviesRecyclerView.layoutManager = LinearLayoutManager(activity)
+        moviesAdapter = MoviesAdapter(moviesViewModel)
+        moviesRecyclerView.adapter = moviesAdapter
     }
 
     override fun onCreateView(
@@ -37,12 +40,6 @@ class MoviesFragment : BaseFragment(), StateLifecycle<MovieWebServiceResponse> {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_movies, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        moviesRecyclerView.layoutManager = LinearLayoutManager(activity)
-        moviesAdapter = MoviesAdapter()
-        moviesRecyclerView.adapter = moviesAdapter
-    }
 
     override fun update(state: Resource<MovieWebServiceResponse>) {
         // TODO: need to display loading spinner and failed message

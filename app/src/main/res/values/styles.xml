@@ -48,12 +48,12 @@
         <item name="android:maxLines">4</item>
     </style>
 
-    <style name="MovieCard.RatingLabel" parent="Layout.WrapContent">
+    <style name="RatingLabel" parent="Layout.WrapContent">
         <item name="android:layout_marginTop">@dimen/default_margin_between_views</item>
         <item name="android:text">@string/rating_label</item>
     </style>
 
-    <style name="MovieCard.Rating" parent="Layout.WrapContent">
+    <style name="Rating" parent="Layout.WrapContent">
         <item name="android:layout_marginTop">@dimen/default_margin_between_views</item>
         <item name="android:textStyle">bold</item>
     </style>
